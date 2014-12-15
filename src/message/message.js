@@ -82,6 +82,11 @@ Message.prototype.unmarshall = function (data) {
         } else if (parts.length === 1) {
             value = parts[0];
         }
+        if (key.length > 10 || key.length === 0) {
+          this.set('data', this.data || '');
+          this.set('data', this.data + this.lines[line] + this.EOL);
+          continue;
+        }
         var keySafe = key.replace(/-/, '_').toLowerCase();
         var valueSafe = value.replace(/^\s+/g, '').replace(/\s+$/g, '');
         if (keySafe.match(/variable/) !== null) {
